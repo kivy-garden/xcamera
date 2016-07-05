@@ -14,7 +14,7 @@ BoxLayout:
     BoxLayout:
         orientation: 'horizontal'
         size_hint: 1, None
-        height: sp(30)
+        height: sp(50)
 
         Button:
             text: 'Set landscape'

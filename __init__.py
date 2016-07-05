@@ -4,6 +4,8 @@ import os
 import datetime
 from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.label import Label
+from kivy.uix.behaviors import ButtonBehavior
 from kivy.resources import resource_add_path
 from .platform_api import take_picture, set_orientation, LANDSCAPE
 
@@ -11,11 +13,27 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 resource_add_path(ROOT)
 
 kv = """
+<IconButton>
+    icon_color: (0, 0, 0, 1)
+    icon_size: dp(50)
+
+    canvas.before:
+        Color:
+            rgba: self.icon_color
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+    size_hint: None, None
+    size: self.icon_size, self.icon_size
+    font_size: self.icon_size/2
+
+
 <XCamera>:
     # \ue800 corresponds to the camera icon in the font
     icon: u"[font=data/xcamera/icons.ttf]\ue800[/font]"
     icon_color: (0.13, 0.58, 0.95, 0.8)
-    icon_size: dp(50)
+    icon_size: dp(70)
 
     Camera:
         id: camera
@@ -24,32 +42,21 @@ kv = """
         size_hint: 1, 1
 
     # Shoot button
-    Label:
-        # background circle
-        canvas.before:
-            Color:
-                rgba: root.icon_color
-            Ellipse:
-                pos: self.pos
-                size: self.size
-
-        # foreground camera icon
+    IconButton:
         markup: True
-        text: u"[ref=x]%s[/ref]" % root.icon
-
-        # size
-        size_hint: None, None
-        size: root.icon_size, root.icon_size
-        font_size: root.icon_size/2
+        text: root.icon
+        icon_color: root.icon_color
+        icon_size: root.icon_size
+        on_release: root.shoot()
 
         # position
         right: root.width - dp(10)
         center_y: root.center_y
-
-        on_ref_press: root.shoot()
-
 """
 Builder.load_string(kv)
+
+class IconButton(ButtonBehavior, Label):
+    pass
 
 
 class XCamera(FloatLayout):
