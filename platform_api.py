@@ -11,14 +11,13 @@ def play_shutter():
 
 
 if platform == 'android':
-    raise ImportError # not implemented yet
-    #from .android_api import *
+    from .android_api import *
 
 else:
 
     # generic fallback for taking pictures. Probably not the best quality,
     # they are meant mostly for testing
 
-    def take_picture(camera, filename):
-        camera.texture.save(filename, flipped=False)
+    def take_picture(camera_widget, filename):
+        camera_widget.texture.save(filename, flipped=False)
         play_shutter()
