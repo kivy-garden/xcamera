@@ -14,5 +14,5 @@ functionality. In particular:
      "camera.resource_orientation()" to restore the orientation to whatever it
      was before.
 
-
+Screenshot:
 ![screenshot](/screenshot.jpg?raw=True "Screenshot")
