@@ -20,9 +20,10 @@ else:
     LANDSCAPE = 'landscape'
     PORTRAIT = 'portrait'
 
-    def take_picture(camera_widget, filename):
+    def take_picture(camera_widget, filename, on_success):
         camera_widget.texture.save(filename, flipped=False)
         play_shutter()
+        on_success(filename)
 
     def set_orientation(value):
         pass

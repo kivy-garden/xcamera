@@ -61,13 +61,22 @@ class IconButton(ButtonBehavior, Label):
 
 class XCamera(FloatLayout):
     previous_orientation = None
+    __events__ = ('on_picture_taken',)
+
+    def on_picture_taken(self, filename):
+        """
+        This event is fired every time a picture has been taken
+        """
 
     def get_filename(self):
         return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.jpg')
 
     def shoot(self):
+        def on_success(filename):
+            self.dispatch('on_picture_taken', filename)
+        #
         filename = self.get_filename()
-        take_picture(self.ids.camera, filename)
+        take_picture(self.ids.camera, filename, on_success)
 
     def set_orientation(self):
         self.previous_orientation = set_orientation(LANDSCAPE)
@@ -75,3 +84,4 @@ class XCamera(FloatLayout):
     def restore_orientation(self):
         if self.previous_orientation is not None:
             set_orientation(self.previous_orientation)
+
