@@ -1,7 +1,11 @@
+from __future__ import absolute_import
+
 import os
+import datetime
 from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
 from kivy.resources import resource_add_path
+from .platform_api import take_picture
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 resource_add_path(ROOT)
@@ -14,7 +18,7 @@ kv = """
     icon_size: dp(50)
 
     Camera:
-        id: corecam
+        id: camera
         resolution: 640, 480
         play: True
         allow_stretch: True
@@ -43,13 +47,17 @@ kv = """
         right: root.width - dp(10)
         center_y: root.center_y
 
+        on_ref_press: root.shoot()
+
 """
 Builder.load_string(kv)
 
 
 class XCamera(FloatLayout):
 
+    def get_filename(self):
+        return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.jpg')
+
     def shoot(self):
-        print 'shoot'
-
-
+        filename = self.get_filename()
+        take_picture(self.ids.camera, filename)
