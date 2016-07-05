@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 from jnius import autoclass, PythonJavaClass, java_method, JavaException
+from kivy.logger import Logger
 
 Camera = autoclass('android.hardware.Camera')
 AndroidActivityInfo = autoclass('android.content.pm.ActivityInfo')
@@ -25,11 +26,10 @@ class PictureCallback(PythonJavaClass):
 
     @java_method('([BLandroid/hardware/Camera;)V')
     def onPictureTaken(self, data, camera):
-        print 'onPictureTaken'
         s = data.tostring()
         with open(self.filename, 'wb') as f:
             f.write(s)
-        print 'saved to', self.filename
+        Logger.info('xcamera: picture saved to %s', self.filename)
         camera.startPreview()
 
 
@@ -43,11 +43,12 @@ class AutoFocusCallback(PythonJavaClass):
     @java_method('(ZLandroid/hardware/Camera;)V')
     def onAutoFocus(self, success, camera):
         if success:
+            Logger.info('xcamera: autofocus succeeded, taking picture...')
             shutter_cb = ShutterCallback()
             picture_cb = PictureCallback(self.filename)
             camera.takePicture(shutter_cb, None, picture_cb)
         else:
-            print 'autofocus failed'
+            Logger.info('xcamera: autofocus failed')
 
 
 def take_picture(camera_widget, filename):
@@ -61,11 +62,11 @@ def take_picture(camera_widget, filename):
     params.setFocusMode("auto")
     camera.setParameters(params)
     cb = AutoFocusCallback(filename)
+    Logger.info('xcamera: starting autofocus...')
     try:
         camera.autoFocus(cb)
     except JavaException, e:
-        print 'JavaException when calling autofocus', e
-
+        Logger.info('Error when calling autofocus: {}', e)
 
 
 PORTRAIT = AndroidActivityInfo.SCREEN_ORIENTATION_PORTRAIT
