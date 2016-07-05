@@ -17,7 +17,15 @@ else:
 
     # generic fallback for taking pictures. Probably not the best quality,
     # they are meant mostly for testing
+    LANDSCAPE = 'landscape'
+    PORTRAIT = 'portrait'
 
     def take_picture(camera_widget, filename):
         camera_widget.texture.save(filename, flipped=False)
         play_shutter()
+
+    def set_orientation(value):
+        pass
+
+    def get_orientation(value):
+        pass

@@ -5,7 +5,7 @@ import datetime
 from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
 from kivy.resources import resource_add_path
-from .platform_api import take_picture
+from .platform_api import take_picture, set_orientation, LANDSCAPE
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 resource_add_path(ROOT)
@@ -20,7 +20,6 @@ kv = """
     Camera:
         id: camera
         resolution: 640, 480
-        play: True
         allow_stretch: True
         size_hint: 1, 1
 
@@ -54,6 +53,7 @@ Builder.load_string(kv)
 
 
 class XCamera(FloatLayout):
+    previous_orientation = None
 
     def get_filename(self):
         return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.jpg')
@@ -61,3 +61,10 @@ class XCamera(FloatLayout):
     def shoot(self):
         filename = self.get_filename()
         take_picture(self.ids.camera, filename)
+
+    def set_orientation(self):
+        self.previous_orientation = set_orientation(LANDSCAPE)
+
+    def restore_orientation(self):
+        if self.previous_orientation is not None:
+            set_orientation(self.previous_orientation)

@@ -1,6 +1,8 @@
 from jnius import autoclass, PythonJavaClass, java_method
 
 Camera = autoclass('android.hardware.Camera')
+AndroidActivityInfo = autoclass('android.content.pm.ActivityInfo')
+AndroidPythonActivity = autoclass('org.renpy.android.PythonActivity')
 
 class PictureCallback(PythonJavaClass):
     __javainterfaces__ = ('android.hardware.Camera$PictureCallback', )
@@ -30,3 +32,15 @@ def take_picture(camera_widget, filename):
     callback = PictureCallback(camera, filename)
     camera.takePicture(None, None, callback)
 
+
+
+PORTRAIT = AndroidActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+LANDSCAPE = AndroidActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+
+def set_orientation(value):
+    previous = get_orientation()
+    AndroidPythonActivity.mActivity.setRequestedOrientation(value)
+    return previous
+
+def get_orientation():
+    return AndroidPythonActivity.mActivity.getRequestedOrientation()
