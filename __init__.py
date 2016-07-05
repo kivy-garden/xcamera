@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import os
 import datetime
 from kivy.lang import Builder
-from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.label import Label
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.resources import resource_add_path
@@ -51,7 +51,7 @@ kv = """
 
         # position
         right: root.width - dp(10)
-        center_y: root.center_y
+        center_y: root.height/2
 """
 Builder.load_string(kv)
 
@@ -59,7 +59,7 @@ class IconButton(ButtonBehavior, Label):
     pass
 
 
-class XCamera(FloatLayout):
+class XCamera(RelativeLayout):
     previous_orientation = None
     __events__ = ('on_picture_taken',)
 
