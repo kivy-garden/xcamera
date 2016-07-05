@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import os
 import datetime
 from kivy.lang import Builder
-from kivy.uix.relativelayout import RelativeLayout
+from kivy.uix.camera import Camera
 from kivy.uix.label import Label
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.resources import resource_add_path
@@ -35,11 +35,9 @@ kv = """
     icon_color: (0.13, 0.58, 0.95, 0.8)
     icon_size: dp(70)
 
-    Camera:
-        id: camera
-        resolution: 640, 480
-        allow_stretch: True
-        size_hint: 1, 1
+    id: camera
+    resolution: 1920, 1080
+    allow_stretch: True
 
     # Shoot button
     IconButton:
@@ -51,7 +49,7 @@ kv = """
 
         # position
         right: root.width - dp(10)
-        center_y: root.height/2
+        center_y: root.center_y
 """
 Builder.load_string(kv)
 
@@ -59,7 +57,7 @@ class IconButton(ButtonBehavior, Label):
     pass
 
 
-class XCamera(RelativeLayout):
+class XCamera(Camera):
     previous_orientation = None
     __events__ = ('on_picture_taken',)
 
@@ -76,9 +74,9 @@ class XCamera(RelativeLayout):
             self.dispatch('on_picture_taken', filename)
         #
         filename = self.get_filename()
-        take_picture(self.ids.camera, filename, on_success)
+        take_picture(self, filename, on_success)
 
-    def set_orientation(self):
+    def force_landscape(self):
         self.previous_orientation = set_orientation(LANDSCAPE)
 
     def restore_orientation(self):

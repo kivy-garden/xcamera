@@ -5,7 +5,7 @@ from kivy.app import App
 kv = """
 #:import XCamera kivy.garden.xcamera.XCamera
 
-BoxLayout:
+FloatLayout:
     orientation: 'vertical'
 
     XCamera:
@@ -18,7 +18,7 @@ BoxLayout:
 
         Button:
             text: 'Set landscape'
-            on_release: xcamera.set_orientation()
+            on_release: xcamera.force_landscape()
 
         Button:
             text: 'Restore orientation'
