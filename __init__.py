@@ -12,14 +12,24 @@ from .platform_api import take_picture, set_orientation, LANDSCAPE
 ROOT = os.path.dirname(os.path.abspath(__file__))
 resource_add_path(ROOT)
 
+def darker(color, factor=0.5):
+    r, g, b, a = color
+    r *= factor
+    g *= factor
+    b *= factor
+    return r, g, b, a
+
 kv = """
+#:import xcamera kivy.garden.xcamera
+
 <IconButton>
     icon_color: (0, 0, 0, 1)
+    _down_color: xcamera.darker(self.icon_color)
     icon_size: dp(50)
 
     canvas.before:
         Color:
-            rgba: self.icon_color
+            rgba: self.icon_color if self.state == 'normal' else self._down_color
         Ellipse:
             pos: self.pos
             size: self.size
