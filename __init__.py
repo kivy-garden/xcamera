@@ -23,7 +23,7 @@ def darker(color, factor=0.5):
 kv = """
 #:import xcamera kivy.garden.xcamera
 
-<IconButton>
+<XCameraIconButton>
     icon_color: (0, 0, 0, 1)
     _down_color: xcamera.darker(self.icon_color)
     icon_size: dp(50)
@@ -51,7 +51,7 @@ kv = """
     allow_stretch: True
 
     # Shoot button
-    IconButton:
+    XCameraIconButton:
         markup: True
         text: root.icon
         icon_color: root.icon_color
@@ -64,7 +64,7 @@ kv = """
 """
 Builder.load_string(kv)
 
-class IconButton(ButtonBehavior, Label):
+class XCameraIconButton(ButtonBehavior, Label):
     pass
 
 
