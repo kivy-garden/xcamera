@@ -26,7 +26,11 @@ else:
         on_success(filename)
 
     def set_orientation(value):
-        pass
+        previous = get_orientation()
+        print 'FAKE orientation set to', value
+        get_orientation.value = value
+        return previous
 
-    def get_orientation(value):
-        pass
+    def get_orientation():
+        return get_orientation.value
+    get_orientation.value = PORTRAIT
