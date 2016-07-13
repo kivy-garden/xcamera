@@ -6,6 +6,7 @@ from kivy.lang import Builder
 from kivy.uix.camera import Camera
 from kivy.uix.label import Label
 from kivy.uix.behaviors import ButtonBehavior
+from kivy.properties import ObjectProperty
 from kivy.resources import resource_add_path
 from .platform_api import take_picture, set_orientation, LANDSCAPE
 
@@ -68,7 +69,8 @@ class IconButton(ButtonBehavior, Label):
 
 
 class XCamera(Camera):
-    previous_orientation = None
+    directory = ObjectProperty(None)
+    _previous_orientation = None
     __events__ = ('on_picture_taken',)
 
     def on_picture_taken(self, filename):
@@ -84,12 +86,14 @@ class XCamera(Camera):
             self.dispatch('on_picture_taken', filename)
         #
         filename = self.get_filename()
+        if self.directory:
+            filename = os.path.join(self.directory, filename)
         take_picture(self, filename, on_success)
 
     def force_landscape(self):
-        self.previous_orientation = set_orientation(LANDSCAPE)
+        self._previous_orientation = set_orientation(LANDSCAPE)
 
     def restore_orientation(self):
-        if self.previous_orientation is not None:
-            set_orientation(self.previous_orientation)
+        if self._previous_orientation is not None:
+            set_orientation(self._previous_orientation)
 
