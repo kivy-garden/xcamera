@@ -47,7 +47,7 @@ kv = """
     icon_size: dp(70)
 
     id: camera
-    resolution: 1920, 1080
+    resolution: 640, 480 # 1920, 1080
     allow_stretch: True
 
     # Shoot button
@@ -79,7 +79,7 @@ class XCamera(Camera):
         """
 
     def get_filename(self):
-        return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.jpg')
+        return datetime.datetime.now().strftime('%Y-%m-%d %H.%M.%S.jpg')
 
     def shoot(self):
         def on_success(filename):
