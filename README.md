@@ -15,7 +15,7 @@ functionality. In particular:
      was before.
 
 Screenshot:
-![screenshot](/screenshot.jpg?raw=True "Screenshot")
+![screenshot](/screenshot.png?raw=True "Screenshot")
 
 Notes:
 
