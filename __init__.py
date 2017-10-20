@@ -52,6 +52,7 @@ kv = """
 
     # Shoot button
     XCameraIconButton:
+        id: shoot_button
         markup: True
         text: root.icon
         icon_color: root.icon_color
