@@ -27,7 +27,7 @@ else:
 
     def set_orientation(value):
         previous = get_orientation()
-        print 'FAKE orientation set to', value
+        print('FAKE orientation set to {}'.format(value))
         get_orientation.value = value
         return previous
 

@@ -68,8 +68,8 @@ def take_picture(camera_widget, filename, on_success):
     Logger.info('xcamera: starting autofocus...')
     try:
         camera.autoFocus(cb)
-    except JavaException, e:
-        Logger.info('Error when calling autofocus: {}', e)
+    except JavaException as e:
+        Logger.info('Error when calling autofocus: {}'.format(e))
 
 
 PORTRAIT = AndroidActivityInfo.SCREEN_ORIENTATION_PORTRAIT
