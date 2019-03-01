@@ -32,7 +32,7 @@ class CameraApp(App):
         return Builder.load_string(kv)
 
     def picture_taken(self, obj, filename):
-        print 'Picture taken and saved to', filename
+        print('Picture taken and saved to {}'.format(filename))
 
 if __name__ == '__main__':
     CameraApp().run()
