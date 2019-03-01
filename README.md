@@ -30,3 +30,8 @@ Notes:
     sizes, and add a property to control it.  It would also be nice to add a
     new button to allow the user to manually select the preferred size.  Pull
     requests are welcome :)
+
+## Install
+```
+garden install xcamera
+```
