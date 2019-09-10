@@ -9,6 +9,6 @@
   - Unit tests `platform_api` module, refs #3
   - Introduce `Makefile`, refs #8
 
-## [20190910]
+## [2019.0910]
 
   - Initial release before revamp
