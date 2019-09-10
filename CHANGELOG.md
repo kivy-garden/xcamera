@@ -6,7 +6,7 @@
   - Setup Docker testing
   - Setup Continuous Integration testing, refs #1
   - Setup linting, refs #2
-  - Adds basic unit tests, refs #3
+  - Unit tests `platform_api` module, refs #3
   - Introduce `Makefile`, refs #8
 
 ## [20190910]

@@ -23,3 +23,13 @@ class TestPlatformAPI:
         assert m_camera_widget.mock_calls == [
             mock.call.texture.save(filename, flipped=False)]
         assert m_on_success.mock_calls == [mock.call(filename)]
+
+    def test_set_orientation(self):
+        value = platform_api.LANDSCAPE
+        assert platform_api.set_orientation(value) == platform_api.PORTRAIT
+        assert platform_api.set_orientation(value) == platform_api.LANDSCAPE
+
+    def test_get_orientation(self):
+        value = platform_api.LANDSCAPE
+        platform_api.set_orientation(value)
+        assert platform_api.get_orientation() == value
