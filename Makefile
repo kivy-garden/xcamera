@@ -31,7 +31,9 @@ venv:
 virtualenv: venv
 	$(PIP) install Cython==0.28.6
 	$(PIP) install -r requirements.txt
-	$(GARDEN) install xcamera
+
+virtualenv/test: virtualenv
+	$(PIP) install -r requirements/requirements-test.txt
 
 system_dependencies:
 ifeq ($(OS), Ubuntu)
