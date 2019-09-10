@@ -24,52 +24,6 @@ def darker(color, factor=0.5):
     return r, g, b, a
 
 
-kv = """
-#:import xcamera kivy_garden.xcamera
-
-<XCameraIconButton>
-    icon_color: (0, 0, 0, 1)
-    _down_color: xcamera.darker(self.icon_color)
-    icon_size: dp(50)
-
-    canvas.before:
-        Color:
-            rgba: self.icon_color if self.state == 'normal' else self._down_color
-        Ellipse:
-            pos: self.pos
-            size: self.size
-
-    size_hint: None, None
-    size: self.icon_size, self.icon_size
-    font_size: self.icon_size/2
-
-
-<XCamera>:
-    # \ue800 corresponds to the camera icon in the font
-    icon: u"[font=data/xcamera/icons.ttf]\ue800[/font]"
-    icon_color: (0.13, 0.58, 0.95, 0.8)
-    icon_size: dp(70)
-
-    id: camera
-    resolution: 640, 480 # 1920, 1080
-    allow_stretch: True
-
-    # Shoot button
-    XCameraIconButton:
-        id: shoot_button
-        markup: True
-        text: root.icon
-        icon_color: root.icon_color
-        icon_size: root.icon_size
-        on_release: root.shoot()
-
-        # position
-        right: root.width - dp(10)
-        center_y: root.center_y
-"""
-Builder.load_string(kv)
-
-
 class XCameraIconButton(ButtonBehavior, Label):
     pass
 
@@ -78,6 +32,10 @@ class XCamera(Camera):
     directory = ObjectProperty(None)
     _previous_orientation = None
     __events__ = ('on_picture_taken',)
+
+    def __init__(self, **kwargs):
+        Builder.load_file(os.path.join(ROOT, "xcamera.kv"))
+        super().__init__(**kwargs)
 
     def on_picture_taken(self, filename):
         """
