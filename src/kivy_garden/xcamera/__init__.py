@@ -15,12 +15,14 @@ from .platform_api import LANDSCAPE, set_orientation, take_picture
 ROOT = os.path.dirname(os.path.abspath(__file__))
 resource_add_path(ROOT)
 
+
 def darker(color, factor=0.5):
     r, g, b, a = color
     r *= factor
     g *= factor
     b *= factor
     return r, g, b, a
+
 
 kv = """
 #:import xcamera kivy_garden.xcamera
@@ -66,6 +68,7 @@ kv = """
         center_y: root.center_y
 """
 Builder.load_string(kv)
+
 
 class XCameraIconButton(ButtonBehavior, Label):
     pass

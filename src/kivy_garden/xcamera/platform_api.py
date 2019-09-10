@@ -13,7 +13,7 @@ def play_shutter():
 
 
 if platform == 'android':
-    from .android_api import *
+    from .android_api import *  # noqa: F401, F403
 
 else:
 

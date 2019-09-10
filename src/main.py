@@ -1,5 +1,3 @@
-import datetime
-
 from kivy.app import App
 from kivy.lang import Builder
 
@@ -34,6 +32,7 @@ class CameraApp(App):
 
     def picture_taken(self, obj, filename):
         print('Picture taken and saved to {}'.format(filename))
+
 
 if __name__ == '__main__':
     CameraApp().run()
