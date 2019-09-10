@@ -1,5 +1,8 @@
 # XCamera: Android-optimized camera widget
 
+[![Build Status](https://travis-ci.com/kivy-garden/xcamera.svg?branch=develop)](https://travis-ci.com/kivy-garden/xcamera)
+[![PyPI version](https://badge.fury.io/py/xcamera.svg)](https://badge.fury.io/py/xcamera)
+
 XCamera is a widget which extends the standard Kivy Camera widget with more
 functionality. In particular:
 
