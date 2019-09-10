@@ -1,0 +1,6 @@
+bin/
+venv/
+.git/
+.buildozer/
+.pytest_cache/
+.tox/
