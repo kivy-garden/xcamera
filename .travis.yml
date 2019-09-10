@@ -1,6 +1,25 @@
-sudo: false
-language: python
-python:
-    - "3.6"
-install: pip install tox-travis
-script: tox
+sudo: required
+
+language: generic
+
+services:
+  - docker
+
+env:
+  global:
+    - DISPLAY=:99.0
+  matrix:
+    - TAG=zbarcam-linux DOCKERFILE=dockerfiles/Dockerfile-linux COMMAND='tox'
+
+before_install:
+  - sudo apt update -qq > /dev/null
+  - sudo apt install --yes --no-install-recommends xvfb
+
+install:
+  - docker build --tag=$TAG --file=$DOCKERFILE --build-arg CI .
+
+before_script:
+  - sh -e /etc/init.d/xvfb start
+
+script:
+  - travis_wait docker run -e DISPLAY -e CI -v /tmp/.X11-unix:/tmp/.X11-unix $TAG $COMMAND
