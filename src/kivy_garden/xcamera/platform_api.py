@@ -13,7 +13,8 @@ def play_shutter():
 
 
 if platform == 'android':
-    from .android_api import *  # noqa: F401, F403
+    from .android_api import (
+        LANDSCAPE, PORTRAIT, take_picture, set_orientation, get_orientation)
 
 else:
 

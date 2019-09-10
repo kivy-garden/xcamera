@@ -7,6 +7,8 @@ from jnius import JavaException, PythonJavaClass, autoclass, java_method
 Camera = autoclass('android.hardware.Camera')
 AndroidActivityInfo = autoclass('android.content.pm.ActivityInfo')
 AndroidPythonActivity = autoclass('org.renpy.android.PythonActivity')
+PORTRAIT = AndroidActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+LANDSCAPE = AndroidActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
 
 class ShutterCallback(PythonJavaClass):
@@ -73,10 +75,6 @@ def take_picture(camera_widget, filename, on_success):
         camera.autoFocus(cb)
     except JavaException as e:
         Logger.info('Error when calling autofocus: {}'.format(e))
-
-
-PORTRAIT = AndroidActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-LANDSCAPE = AndroidActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
 
 def set_orientation(value):
