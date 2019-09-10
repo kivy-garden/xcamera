@@ -1,6 +1,8 @@
 from __future__ import absolute_import
-from jnius import autoclass, PythonJavaClass, java_method, JavaException
+
 from kivy.logger import Logger
+
+from jnius import JavaException, PythonJavaClass, autoclass, java_method
 
 Camera = autoclass('android.hardware.Camera')
 AndroidActivityInfo = autoclass('android.content.pm.ActivityInfo')

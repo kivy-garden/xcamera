@@ -1,6 +1,7 @@
 import datetime
-from kivy.lang import Builder
+
 from kivy.app import App
+from kivy.lang import Builder
 
 kv = """
 #:import XCamera kivy_garden.xcamera.XCamera

@@ -1,14 +1,16 @@
 from __future__ import absolute_import
 
-import os
 import datetime
+import os
+
 from kivy.lang import Builder
-from kivy.uix.camera import Camera
-from kivy.uix.label import Label
-from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import ObjectProperty
 from kivy.resources import resource_add_path
-from .platform_api import take_picture, set_orientation, LANDSCAPE
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.camera import Camera
+from kivy.uix.label import Label
+
+from .platform_api import LANDSCAPE, set_orientation, take_picture
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 resource_add_path(ROOT)
@@ -97,4 +99,3 @@ class XCamera(Camera):
     def restore_orientation(self):
         if self._previous_orientation is not None:
             set_orientation(self._previous_orientation)
-

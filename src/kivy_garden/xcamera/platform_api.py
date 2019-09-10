@@ -1,5 +1,7 @@
 from __future__ import absolute_import
+
 from kivy.utils import platform
+
 
 def play_shutter():
     # bah, apparently we need to delay the import of kivy.core.audio, lese
