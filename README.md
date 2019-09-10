@@ -18,6 +18,7 @@ functionality. In particular:
      was before.
 
 Screenshot:
+
 ![screenshot](/screenshot.png?raw=True "Screenshot")
 
 Notes:
@@ -41,3 +42,17 @@ pip install xcamera
 
 ## Demo
 A full working demo is available in [src/main.py](https://github.com/kivy-garden/xcamera/blob/master/src/main.py).
+You can run it via:
+```sh
+make run
+```
+
+## Contribute
+To play with the project, install system dependencies and Python requirements using the [Makefile](Makefile).
+```sh
+make
+```
+Then verify everything is OK by running tests.
+```sh
+make test
+```
