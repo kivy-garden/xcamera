@@ -1,17 +1,18 @@
-from __future__ import absolute_import
 from kivy.utils import platform
+
 
 def play_shutter():
     # bah, apparently we need to delay the import of kivy.core.audio, lese
     # kivy cannot find a camera provider, at lease on linux. Maybe a
     # gstreamer/pygame issue?
     from kivy.core.audio import SoundLoader
-    sound = SoundLoader.load("data/xcamera/shutter.wav")
+    sound = SoundLoader.load("data/shutter.wav")
     sound.play()
 
 
 if platform == 'android':
-    from .android_api import *
+    from .android_api import (
+        LANDSCAPE, PORTRAIT, take_picture, set_orientation, get_orientation)
 
 else:
 

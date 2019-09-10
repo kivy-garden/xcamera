@@ -1,5 +1,8 @@
 # XCamera: Android-optimized camera widget
 
+[![Build Status](https://travis-ci.com/kivy-garden/xcamera.svg?branch=develop)](https://travis-ci.com/kivy-garden/xcamera)
+[![PyPI version](https://badge.fury.io/py/xcamera.svg)](https://badge.fury.io/py/xcamera)
+
 XCamera is a widget which extends the standard Kivy Camera widget with more
 functionality. In particular:
 
@@ -15,6 +18,7 @@ functionality. In particular:
      was before.
 
 Screenshot:
+
 ![screenshot](/screenshot.png?raw=True "Screenshot")
 
 Notes:
@@ -32,6 +36,23 @@ Notes:
     requests are welcome :)
 
 ## Install
+```sh
+pip install xcamera
 ```
-garden install xcamera
+
+## Demo
+A full working demo is available in [src/main.py](https://github.com/kivy-garden/xcamera/blob/master/src/main.py).
+You can run it via:
+```sh
+make run
+```
+
+## Contribute
+To play with the project, install system dependencies and Python requirements using the [Makefile](Makefile).
+```sh
+make
+```
+Then verify everything is OK by running tests.
+```sh
+make test
 ```

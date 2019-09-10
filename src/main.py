@@ -1,9 +1,8 @@
-import datetime
-from kivy.lang import Builder
 from kivy.app import App
+from kivy.lang import Builder
 
 kv = """
-#:import XCamera kivy.garden.xcamera.XCamera
+#:import XCamera kivy_garden.xcamera.XCamera
 
 FloatLayout:
     orientation: 'vertical'
@@ -33,6 +32,7 @@ class CameraApp(App):
 
     def picture_taken(self, obj, filename):
         print('Picture taken and saved to {}'.format(filename))
+
 
 if __name__ == '__main__':
     CameraApp().run()
