@@ -18,9 +18,12 @@ setup_params = {
     'long_description': read('README.md'),
     'long_description_content_type': 'text/markdown',
     'author': 'Antonio Cuni',
-    'url': 'https://github.com/kivy-garden/garden.xcamera',
+    'url': 'https://github.com/kivy-garden/xcamera',
     'packages': find_namespace_packages(where='src'),
-    'package_data': {'kivy_garden.xcamera': ['*.kv']},
+    'package_data': {
+        'kivy_garden.xcamera': ['*.kv'],
+        'kivy_garden.xcamera.data': ['*.ttf', '*.wav'],
+    },
     'package_dir': {'': 'src'},
     'install_requires': [
         'kivy',

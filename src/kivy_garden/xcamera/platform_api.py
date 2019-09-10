@@ -6,7 +6,7 @@ def play_shutter():
     # kivy cannot find a camera provider, at lease on linux. Maybe a
     # gstreamer/pygame issue?
     from kivy.core.audio import SoundLoader
-    sound = SoundLoader.load("data/xcamera/shutter.wav")
+    sound = SoundLoader.load("data/shutter.wav")
     sound.play()
 
 
