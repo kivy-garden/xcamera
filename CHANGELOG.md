@@ -4,6 +4,7 @@
 
   - Move to new garden layout
   - Setup Continuous Integration testing, refs #1
+  - Setup linting, refs #2
 
 ## [20190910]
 
