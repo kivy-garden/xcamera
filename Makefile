@@ -6,7 +6,7 @@ PYTHON=$(VENV_NAME)/bin/python
 ISORT=$(VENV_NAME)/bin/isort
 FLAKE8=$(VENV_NAME)/bin/flake8
 TWINE=`which twine`
-SOURCES=src/ setup.py setup_meta.py
+SOURCES=src/ tests/ setup.py setup_meta.py
 # using full path so it can be used outside the root dir
 SPHINXBUILD=$(shell realpath venv/bin/sphinx-build)
 DOCS_DIR=doc
