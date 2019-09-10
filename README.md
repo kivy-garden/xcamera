@@ -32,6 +32,9 @@ Notes:
     requests are welcome :)
 
 ## Install
+```sh
+pip install xcamera
 ```
-garden install xcamera
-```
+
+## Demo
+A full working demo is available in [src/main.py](https://github.com/kivy-garden/xcamera/blob/master/src/main.py).

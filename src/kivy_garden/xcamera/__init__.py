@@ -21,7 +21,7 @@ def darker(color, factor=0.5):
     return r, g, b, a
 
 kv = """
-#:import xcamera kivy.garden.xcamera
+#:import xcamera kivy_garden.xcamera
 
 <XCameraIconButton>
     icon_color: (0, 0, 0, 1)
