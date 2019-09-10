@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import datetime
 import os
 
@@ -48,7 +46,6 @@ class XCamera(Camera):
     def shoot(self):
         def on_success(filename):
             self.dispatch('on_picture_taken', filename)
-        #
         filename = self.get_filename()
         if self.directory:
             filename = os.path.join(self.directory, filename)

@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from kivy.logger import Logger
 
 from jnius import JavaException, PythonJavaClass, autoclass, java_method
