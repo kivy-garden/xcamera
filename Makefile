@@ -41,7 +41,7 @@ ifeq ($(OS), Ubuntu)
 endif
 
 run/linux: virtualenv
-	$(PYTHON) src/main.py
+	$(PYTHON) src/main.py --debug
 
 run: run/linux
 
