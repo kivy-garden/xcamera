@@ -1,5 +1,9 @@
 # Change Log
 
+## [Unreleased]
+
+  - Add Python3.7 support, refs #13
+
 ## [2019.0911]
 
   - Move to new garden layout

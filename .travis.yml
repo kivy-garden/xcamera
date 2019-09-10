@@ -9,7 +9,7 @@ env:
   global:
     - DISPLAY=:99.0
   matrix:
-    - TAG=zbarcam-linux DOCKERFILE=dockerfiles/Dockerfile-linux COMMAND='tox'
+    - TAG=xcamera-linux DOCKERFILE=dockerfiles/Dockerfile-linux COMMAND='make test'
 
 before_install:
   - sudo apt update -qq > /dev/null
