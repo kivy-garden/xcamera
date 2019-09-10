@@ -1,10 +1,13 @@
 from __future__ import absolute_import
-from jnius import autoclass, PythonJavaClass, java_method, JavaException
+
 from kivy.logger import Logger
+
+from jnius import JavaException, PythonJavaClass, autoclass, java_method
 
 Camera = autoclass('android.hardware.Camera')
 AndroidActivityInfo = autoclass('android.content.pm.ActivityInfo')
 AndroidPythonActivity = autoclass('org.renpy.android.PythonActivity')
+
 
 class ShutterCallback(PythonJavaClass):
     __javainterfaces__ = ('android.hardware.Camera$ShutterCallback', )
@@ -75,10 +78,12 @@ def take_picture(camera_widget, filename, on_success):
 PORTRAIT = AndroidActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 LANDSCAPE = AndroidActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
+
 def set_orientation(value):
     previous = get_orientation()
     AndroidPythonActivity.mActivity.setRequestedOrientation(value)
     return previous
+
 
 def get_orientation():
     return AndroidPythonActivity.mActivity.getRequestedOrientation()
