@@ -41,7 +41,7 @@ pip install xcamera
 ```
 
 ## Demo
-A full working demo is available in [src/main.py](https://github.com/kivy-garden/xcamera/blob/master/src/main.py).
+A full working demo is available in [src/kivy_garden/xcamera/main.py](https://github.com/kivy-garden/xcamera/blob/develop/src/main.py).
 You can run it via:
 ```sh
 make run
