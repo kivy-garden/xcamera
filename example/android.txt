@@ -1,3 +1,0 @@
-title=XCamera example
-author=Antonio Cuni
-orientation=portrait,landscape
