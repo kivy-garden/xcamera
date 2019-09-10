@@ -19,7 +19,7 @@ functionality. In particular:
 
 Screenshot:
 
-![screenshot](/screenshot.png?raw=True "Screenshot")
+![screenshot](https://raw.githubusercontent.com/kivy-garden/xcamera/develop/screenshot.png?raw=True "Screenshot")
 
 Notes:
 
