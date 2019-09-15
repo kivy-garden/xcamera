@@ -47,13 +47,13 @@ run: run/linux
 test:
 	$(TOX)
 
-lint/isort-check: virtualenv
+lint/isort-check: virtualenv/test
 	$(ISORT) --check-only --recursive --diff $(SOURCES)
 
-lint/isort-fix: virtualenv
+lint/isort-fix: virtualenv/test
 	$(ISORT) --recursive $(SOURCES)
 
-lint/flake8: virtualenv
+lint/flake8: virtualenv/test
 	$(FLAKE8) $(SOURCES)
 
 lint: lint/isort-check lint/flake8
@@ -67,7 +67,7 @@ docs:
 release/clean:
 	rm -rf dist/ build/
 
-release/build: release/clean
+release/build: release/clean virtualenv
 	$(PYTHON) setup.py sdist bdist_wheel
 	$(PYTHON) setup_meta.py sdist bdist_wheel
 	$(TWINE) check dist/*
