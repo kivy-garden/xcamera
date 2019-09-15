@@ -28,6 +28,7 @@ setup_params = {
     'entry_points': {
         'console_scripts': ['xcamera=kivy_garden.xcamera.main:main'],
     },
+    'python_requires': '>=3',
     'install_requires': [
         'kivy',
         'opencv-python',
