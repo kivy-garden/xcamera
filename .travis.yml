@@ -5,21 +5,8 @@ language: generic
 services:
   - docker
 
-env:
-  global:
-    - DISPLAY=:99.0
-  matrix:
-    - TAG=xcamera-linux DOCKERFILE=dockerfiles/Dockerfile-linux COMMAND='make test'
-
-before_install:
-  - sudo apt update -qq > /dev/null
-  - sudo apt install --yes --no-install-recommends xvfb
-
 install:
-  - docker build --tag=$TAG --file=$DOCKERFILE --build-arg CI .
-
-before_script:
-  - sh -e /etc/init.d/xvfb start
+  - make docker/build
 
 script:
-  - travis_wait docker run -e DISPLAY -e CI -v /tmp/.X11-unix:/tmp/.X11-unix $TAG $COMMAND
+  - make docker/run/test

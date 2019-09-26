@@ -82,3 +82,12 @@ clean: release/clean docs/clean
 
 clean/all: clean
 	rm -rf $(VENV_NAME) .tox/
+
+docker/build:
+	docker build --tag=xcamera-linux --file=dockerfiles/Dockerfile-linux .
+
+docker/run/test:
+	docker run xcamera-linux 'make test'
+
+docker/run/shell:
+	docker run -it --rm xcamera-linux
