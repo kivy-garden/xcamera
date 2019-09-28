@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [2019.0928]
 
   - Setup coverage testing
   - Runtime camera permission check, refs #5
