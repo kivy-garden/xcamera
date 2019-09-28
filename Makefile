@@ -63,7 +63,7 @@ test:
 	@if test -n "$$CI"; then .tox/py$(PYTHON_MAJOR_MINOR)/bin/coveralls; fi; \
 
 pytest: virtualenv/test
-	PYTHONPATH=src $(PYTEST) tests/
+	PYTHONPATH=src $(PYTEST) --cov src/ --cov-report html tests/
 
 lint/isort-check: virtualenv/test
 	$(ISORT) --check-only --recursive --diff $(SOURCES)
@@ -97,6 +97,7 @@ clean: release/clean docs/clean
 	py3clean src/
 	find . -type d -name "__pycache__" -exec rm -r {} +
 	find . -type d -name "*.egg-info" -exec rm -r {} +
+	rm -rf htmlcov/
 
 clean/all: clean
 	rm -rf $(VIRTUAL_ENV) .tox/

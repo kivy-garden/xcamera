@@ -28,6 +28,15 @@ def get_xcamera():
     return camera
 
 
+def patch_is_android():
+    return mock.patch('kivy_garden.xcamera.xcamera.is_android')
+
+
+def patch_android_permissions(m_android_permissions):
+    return mock.patch.dict(
+        'sys.modules', {'android.permissions': m_android_permissions})
+
+
 class TestBase:
 
     def test_darker(self):
@@ -41,6 +50,22 @@ class TestBase:
 
     def test_getfilename(self):
         assert xcamera.get_filename().endswith('.jpg')
+
+    def test_check_camera_permission(self):
+        """
+        Makes sure `check_permission()` is called if `is_android()` is `True`.
+        """
+        m_android_permissions = mock.Mock()
+        with patch_is_android() as m_is_android, \
+                patch_android_permissions(m_android_permissions):
+            m_is_android.return_value = True
+            m_android_permissions.check_permission.return_value = True
+            assert xcamera.check_camera_permission() is True
+        assert m_is_android.mock_calls == [mock.call()]
+        assert m_android_permissions.method_calls == [
+            mock.call.check_permission(
+                m_android_permissions.Permission.CAMERA),
+        ]
 
 
 class TestXCamera:
