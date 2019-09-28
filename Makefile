@@ -14,6 +14,7 @@ SYSTEM_DEPENDENCIES= \
 	ccache \
 	cmake \
 	curl \
+	git \
 	libsdl2-dev \
 	libsdl2-image-dev \
 	libsdl2-mixer-dev \
@@ -32,6 +33,7 @@ OS=$(shell lsb_release -si)
 PYTHON_MAJOR_VERSION=3
 PYTHON_MINOR_VERSION=7
 PYTHON_VERSION=$(PYTHON_MAJOR_VERSION).$(PYTHON_MINOR_VERSION)
+PYTHON_MAJOR_MINOR=$(PYTHON_MAJOR_VERSION)$(PYTHON_MINOR_VERSION)
 PYTHON_WITH_VERSION=python$(PYTHON_VERSION)
 
 
@@ -57,6 +59,7 @@ run: virtualenv
 
 test:
 	$(TOX)
+	@if test -n "$$CI"; then .tox/py$(PYTHON_MAJOR_MINOR)/bin/coveralls; fi; \
 
 lint/isort-check: virtualenv/test
 	$(ISORT) --check-only --recursive --diff $(SOURCES)
@@ -98,10 +101,10 @@ docker/build:
 	docker build --tag=xcamera-linux --file=dockerfiles/Dockerfile-linux .
 
 docker/run/test:
-	docker run xcamera-linux 'make test'
+	docker run --env-file dockerfiles/env.list xcamera-linux 'make test'
 
 docker/run/app:
-	docker run -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 xcamera-linux 'make run'
+	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 xcamera-linux 'make run'
 
 docker/run/shell:
-	docker run -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 -it --rm xcamera-linux
+	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 -it --rm xcamera-linux

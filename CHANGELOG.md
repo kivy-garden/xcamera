@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+  - Setup coverage testing
   - Publish `xcamera` demo binary, refs #9
   - Add Python3.7 support, refs #13
 
