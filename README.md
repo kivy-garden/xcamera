@@ -36,9 +36,19 @@ Notes:
     new button to allow the user to manually select the preferred size.  Pull
     requests are welcome :)
 
-## Install
+## Install & Usage
+[xcamera is available on PyPI](https://pypi.org/project/xcamera/).
+Therefore it can be installed via `pip`.
 ```sh
-pip install xcamera
+pip3 install --user xcamera
+```
+Once installed, the demo should be available in your `PATH` and can be ran from the command line.
+```sh
+xcamera
+```
+And the widget can be imported via:
+```python
+from kivy_garden.xcamera import XCamera
 ```
 
 ## Demo
@@ -48,7 +58,7 @@ You can run it via:
 make run
 ```
 
-## Contribute
+## Develop & Contribute
 To play with the project, install system dependencies and Python requirements using the [Makefile](Makefile).
 ```sh
 make
@@ -56,4 +66,17 @@ make
 Then verify everything is OK by running tests.
 ```sh
 make test
+```
+If you're familiar with `Docker`, the project can also run in a fully isolated container.
+First build the image.
+```sh
+make docker/build
+```
+Then you can run tests within the container.
+```sh
+make docker/run/test
+```
+Or the application itself.
+```sh
+make docker/run/app
 ```
