@@ -22,6 +22,10 @@ def darker(color, factor=0.5):
     return r, g, b, a
 
 
+def get_filename():
+    return datetime.datetime.now().strftime('%Y-%m-%d %H.%M.%S.jpg')
+
+
 class XCameraIconButton(ButtonBehavior, Label):
     pass
 
@@ -40,13 +44,10 @@ class XCamera(Camera):
         This event is fired every time a picture has been taken
         """
 
-    def get_filename(self):
-        return datetime.datetime.now().strftime('%Y-%m-%d %H.%M.%S.jpg')
-
     def shoot(self):
         def on_success(filename):
             self.dispatch('on_picture_taken', filename)
-        filename = self.get_filename()
+        filename = get_filename()
         if self.directory:
             filename = os.path.join(self.directory, filename)
         take_picture(self, filename, on_success)

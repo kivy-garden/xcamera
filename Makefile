@@ -4,6 +4,7 @@ TOX=`which tox`
 PYTHON=$(VIRTUAL_ENV)/bin/python
 ISORT=$(VIRTUAL_ENV)/bin/isort
 FLAKE8=$(VIRTUAL_ENV)/bin/flake8
+PYTEST=$(VIRTUAL_ENV)/bin/pytest
 TWINE=`which twine`
 SOURCES=src/ tests/ setup.py setup_meta.py
 # using full path so it can be used outside the root dir
@@ -61,6 +62,9 @@ test:
 	$(TOX)
 	@if test -n "$$CI"; then .tox/py$(PYTHON_MAJOR_MINOR)/bin/coveralls; fi; \
 
+pytest: virtualenv/test
+	PYTHONPATH=src $(PYTEST) tests/
+
 lint/isort-check: virtualenv/test
 	$(ISORT) --check-only --recursive --diff $(SOURCES)
 
@@ -101,7 +105,7 @@ docker/build:
 	docker build --tag=xcamera-linux --file=dockerfiles/Dockerfile-linux .
 
 docker/run/test:
-	docker run --env-file dockerfiles/env.list xcamera-linux 'make test'
+	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix xcamera-linux 'make test'
 
 docker/run/app:
 	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 xcamera-linux 'make run'
