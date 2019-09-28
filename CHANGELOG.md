@@ -3,6 +3,7 @@
 ## [Unreleased]
 
   - Setup coverage testing
+  - Runtime camera permission check, refs #5
   - Publish `xcamera` demo binary, refs #9
   - Add Python3.7 support, refs #13
 
