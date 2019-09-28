@@ -1,6 +1,7 @@
 # XCamera: Android-optimized camera widget
 
 [![Build Status](https://travis-ci.com/kivy-garden/xcamera.svg?branch=develop)](https://travis-ci.com/kivy-garden/xcamera)
+[![Coverage Status](https://coveralls.io/repos/github/kivy-garden/xcamera/badge.svg?branch=develop)](https://coveralls.io/github/kivy-garden/xcamera?branch=develop)
 [![PyPI version](https://badge.fury.io/py/xcamera.svg)](https://badge.fury.io/py/xcamera)
 
 XCamera is a widget which extends the standard Kivy Camera widget with more
@@ -19,7 +20,7 @@ functionality. In particular:
 
 Screenshot:
 
-![screenshot](/screenshot.png?raw=True "Screenshot")
+![screenshot](https://raw.githubusercontent.com/kivy-garden/xcamera/develop/screenshot.png?raw=True "Screenshot")
 
 Notes:
 
@@ -35,19 +36,29 @@ Notes:
     new button to allow the user to manually select the preferred size.  Pull
     requests are welcome :)
 
-## Install
+## Install & Usage
+[xcamera is available on PyPI](https://pypi.org/project/xcamera/).
+Therefore it can be installed via `pip`.
 ```sh
-pip install xcamera
+pip3 install --user xcamera
+```
+Once installed, the demo should be available in your `PATH` and can be ran from the command line.
+```sh
+xcamera
+```
+And the widget can be imported via:
+```python
+from kivy_garden.xcamera import XCamera
 ```
 
 ## Demo
-A full working demo is available in [src/main.py](https://github.com/kivy-garden/xcamera/blob/master/src/main.py).
+A full working demo is available in [src/kivy_garden/xcamera/main.py](https://github.com/kivy-garden/xcamera/blob/develop/src/main.py).
 You can run it via:
 ```sh
 make run
 ```
 
-## Contribute
+## Develop & Contribute
 To play with the project, install system dependencies and Python requirements using the [Makefile](Makefile).
 ```sh
 make
@@ -55,4 +66,17 @@ make
 Then verify everything is OK by running tests.
 ```sh
 make test
+```
+If you're familiar with `Docker`, the project can also run in a fully isolated container.
+First build the image.
+```sh
+make docker/build
+```
+Then you can run tests within the container.
+```sh
+make docker/run/test
+```
+Or the application itself.
+```sh
+make docker/run/app
 ```

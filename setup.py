@@ -25,8 +25,13 @@ setup_params = {
         'kivy_garden.xcamera.data': ['*.ttf', '*.wav'],
     },
     'package_dir': {'': 'src'},
+    'entry_points': {
+        'console_scripts': ['xcamera=kivy_garden.xcamera.main:main'],
+    },
+    'python_requires': '>=3',
     'install_requires': [
         'kivy',
+        'opencv-python',
     ],
 }
 

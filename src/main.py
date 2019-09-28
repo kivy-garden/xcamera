@@ -1,38 +1,8 @@
-from kivy.app import App
-from kivy.lang import Builder
-
-kv = """
-#:import XCamera kivy_garden.xcamera.XCamera
-
-FloatLayout:
-    orientation: 'vertical'
-
-    XCamera:
-        id: xcamera
-        on_picture_taken: app.picture_taken(*args)
-
-    BoxLayout:
-        orientation: 'horizontal'
-        size_hint: 1, None
-        height: sp(50)
-
-        Button:
-            text: 'Set landscape'
-            on_release: xcamera.force_landscape()
-
-        Button:
-            text: 'Restore orientation'
-            on_release: xcamera.restore_orientation()
 """
-
-
-class CameraApp(App):
-    def build(self):
-        return Builder.load_string(kv)
-
-    def picture_taken(self, obj, filename):
-        print('Picture taken and saved to {}'.format(filename))
-
+This is the file being picked up by `buildozer` as it's expecting a `main.py`
+in the source directory.
+"""
+from kivy_garden.xcamera.main import main
 
 if __name__ == '__main__':
-    CameraApp().run()
+    main()
