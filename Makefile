@@ -26,11 +26,11 @@ SYSTEM_DEPENDENCIES= \
 	pkg-config \
 	python3.6 \
 	python3.6-dev \
-	python3.7 \
-	python3.7-dev \
+	python$(PYTHON_VERSION) \
+	python$(PYTHON_VERSION)-dev \
 	tox \
 	virtualenv
-OS=$(shell lsb_release -si)
+OS=$(shell lsb_release -si 2>/dev/null || uname)
 PYTHON_MAJOR_VERSION=3
 PYTHON_MINOR_VERSION=7
 PYTHON_VERSION=$(PYTHON_MAJOR_VERSION).$(PYTHON_MINOR_VERSION)
