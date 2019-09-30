@@ -37,6 +37,10 @@ PYTHON_VERSION=$(PYTHON_MAJOR_VERSION).$(PYTHON_MINOR_VERSION)
 PYTHON_MAJOR_MINOR=$(PYTHON_MAJOR_VERSION)$(PYTHON_MINOR_VERSION)
 PYTHON_WITH_VERSION=python$(PYTHON_VERSION)
 
+ifndef CI
+DEVICE=--device=/dev/video0:/dev/video0
+endif
+
 
 all: system_dependencies virtualenv
 
@@ -94,7 +98,7 @@ release/upload:
 	$(TWINE) upload dist/*
 
 clean: release/clean docs/clean
-	py3clean src/
+	py3clean .
 	find . -type d -name "__pycache__" -exec rm -r {} +
 	find . -type d -name "*.egg-info" -exec rm -r {} +
 	rm -rf htmlcov/
@@ -106,10 +110,10 @@ docker/build:
 	docker build --tag=xcamera-linux --file=dockerfiles/Dockerfile-linux .
 
 docker/run/test:
-	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix xcamera-linux 'make test'
+	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) xcamera-linux 'make test'
 
 docker/run/app:
-	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 xcamera-linux 'make run'
+	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) xcamera-linux 'make run'
 
 docker/run/shell:
-	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 -it --rm xcamera-linux
+	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) -it --rm xcamera-linux

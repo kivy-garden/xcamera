@@ -40,7 +40,7 @@ Notes:
 [xcamera is available on PyPI](https://pypi.org/project/xcamera/).
 Therefore it can be installed via `pip`.
 ```sh
-pip3 install --user xcamera
+pip3 install xcamera
 ```
 Once installed, the demo should be available in your `PATH` and can be ran from the command line.
 ```sh
