@@ -36,6 +36,7 @@ PYTHON_MINOR_VERSION=7
 PYTHON_VERSION=$(PYTHON_MAJOR_VERSION).$(PYTHON_MINOR_VERSION)
 PYTHON_MAJOR_MINOR=$(PYTHON_MAJOR_VERSION)$(PYTHON_MINOR_VERSION)
 PYTHON_WITH_VERSION=python$(PYTHON_VERSION)
+DOCKER_IMAGE_LINUX=kivy/xcamera-linux
 
 ifndef CI
 DEVICE=--device=/dev/video0:/dev/video0
@@ -50,7 +51,7 @@ ifeq ($(OS), Ubuntu)
 endif
 
 $(VIRTUAL_ENV):
-	virtualenv -p $(PYTHON_WITH_VERSION) $(VIRTUAL_ENV)
+	virtualenv --python $(PYTHON_WITH_VERSION) $(VIRTUAL_ENV)
 	$(PIP) install Cython==0.28.6
 	$(PIP) install -r requirements.txt
 
@@ -106,14 +107,17 @@ clean: release/clean docs/clean
 clean/all: clean
 	rm -rf $(VIRTUAL_ENV) .tox/
 
+docker/pull:
+	docker pull $(DOCKER_IMAGE_LINUX):latest
+
 docker/build:
-	docker build --tag=xcamera-linux --file=dockerfiles/Dockerfile-linux .
+	docker build --cache-from=$(DOCKER_IMAGE_LINUX) --tag=$(DOCKER_IMAGE_LINUX) --file=dockerfiles/Dockerfile-linux .
 
 docker/run/test:
-	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) xcamera-linux 'make test'
+	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) $(DOCKER_IMAGE_LINUX) 'make test'
 
 docker/run/app:
-	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) xcamera-linux 'make run'
+	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) $(DOCKER_IMAGE_LINUX) 'make run'
 
 docker/run/shell:
-	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) -it --rm xcamera-linux
+	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) -it --rm $(DOCKER_IMAGE_LINUX)

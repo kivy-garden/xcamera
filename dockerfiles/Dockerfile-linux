@@ -1,15 +1,15 @@
 # Docker image for installing dependencies on Linux and running tests.
 # Build with:
-#   docker build --tag=xcamera-linux --file=dockerfiles/Dockerfile-linux .
+#   docker build --tag=kivy/xcamera-linux --file=dockerfiles/Dockerfile-linux .
 # Run with:
-# docker run xcamera-linux /bin/sh -c 'make test'
+# docker run kivy/xcamera-linux /bin/sh -c 'make test'
 # Or using the entry point shortcut:
-#   docker run xcamera-linux 'make test'
+#   docker run kivy/xcamera-linux 'make test'
 # For running UI:
 #   xhost +"local:docker@"
-#   docker run -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 xcamera-linux 'make run'
+#   docker run -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 kivy/xcamera-linux 'make run'
 # Or for interactive shell:
-#   docker run -it --rm xcamera-linux
+#   docker run -it --rm kivy/xcamera-linux
 FROM ubuntu:18.04
 
 ENV USER="user"

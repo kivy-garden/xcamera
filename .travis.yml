@@ -8,15 +8,14 @@ services:
 env:
   - DISPLAY=:99.0
 
-before_install:
+install:
   - sudo apt update -qq > /dev/null
   - sudo apt install --yes --no-install-recommends xvfb
 
-install:
-  - make docker/build
-
 before_script:
   - sh -e /etc/init.d/xvfb start
+  - make docker/pull
+  - make docker/build
 
 script:
   - make docker/run/test
