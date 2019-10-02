@@ -40,6 +40,7 @@ RUN gpasswd --add ${USER} video
 
 USER ${USER}
 WORKDIR ${WORK_DIR}
-COPY . ${WORK_DIR}
+COPY Makefile requirements* ${WORK_DIR}/
 RUN sudo make system_dependencies && make virtualenv
+COPY . ${WORK_DIR}
 ENTRYPOINT ["./dockerfiles/start.sh"]
