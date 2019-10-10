@@ -4,16 +4,9 @@ language: generic
 
 services:
   - docker
-
-env:
-  - DISPLAY=:99.0
-
-install:
-  - sudo apt update -qq > /dev/null
-  - sudo apt install --yes --no-install-recommends xvfb
+  - xvfb
 
 before_script:
-  - sh -e /etc/init.d/xvfb start
   - make docker/pull
   - make docker/build
 
