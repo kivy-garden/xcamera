@@ -4,7 +4,7 @@ from jnius import JavaException, PythonJavaClass, autoclass, java_method
 
 Camera = autoclass('android.hardware.Camera')
 AndroidActivityInfo = autoclass('android.content.pm.ActivityInfo')
-AndroidPythonActivity = autoclass('org.renpy.android.PythonActivity')
+AndroidPythonActivity = autoclass('org.kivy.android.PythonActivity')
 PORTRAIT = AndroidActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 LANDSCAPE = AndroidActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
