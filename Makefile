@@ -11,10 +11,6 @@ SOURCES=src/ tests/ setup.py setup_meta.py
 SPHINXBUILD=$(shell realpath venv/bin/sphinx-build)
 DOCS_DIR=doc
 SYSTEM_DEPENDENCIES= \
-	build-essential \
-	ccache \
-	cmake \
-	curl \
 	git \
 	libsdl2-dev \
 	libsdl2-image-dev \
@@ -22,7 +18,6 @@ SYSTEM_DEPENDENCIES= \
 	libsdl2-ttf-dev \
 	libpython3.6-dev \
 	libpython$(PYTHON_VERSION)-dev \
-	libzbar-dev \
 	pkg-config \
 	python3.6 \
 	python3.6-dev \
@@ -30,25 +25,25 @@ SYSTEM_DEPENDENCIES= \
 	python$(PYTHON_VERSION)-dev \
 	tox \
 	virtualenv
-OS=$(shell lsb_release -si 2>/dev/null || uname)
 PYTHON_MAJOR_VERSION=3
 PYTHON_MINOR_VERSION=7
 PYTHON_VERSION=$(PYTHON_MAJOR_VERSION).$(PYTHON_MINOR_VERSION)
 PYTHON_MAJOR_MINOR=$(PYTHON_MAJOR_VERSION)$(PYTHON_MINOR_VERSION)
 PYTHON_WITH_VERSION=python$(PYTHON_VERSION)
 DOCKER_IMAGE_LINUX=kivy/xcamera-linux
+DOCKER_ENV=--env-file dockerfiles/env.list
+DOCKER_VOLUME=--volume /tmp/.X11-unix:/tmp/.X11-unix
 
 ifndef CI
-DEVICE=--device=/dev/video0:/dev/video0
+DOCKER_DEVICE=--device /dev/video0
+DOCKER_GROUP_ADD=--group-add video
 endif
 
 
-all: system_dependencies virtualenv
+all: virtualenv
 
 system_dependencies:
-ifeq ($(OS), Ubuntu)
-	sudo apt install --yes --no-install-recommends $(SYSTEM_DEPENDENCIES)
-endif
+	apt install --yes --no-install-recommends $(SYSTEM_DEPENDENCIES)
 
 $(VIRTUAL_ENV):
 	virtualenv --python $(PYTHON_WITH_VERSION) $(VIRTUAL_ENV)
@@ -65,7 +60,6 @@ run: virtualenv
 
 test:
 	$(TOX)
-	@if test -n "$$CI"; then .tox/py$(PYTHON_MAJOR_MINOR)/bin/coveralls; fi; \
 
 pytest: virtualenv/test
 	PYTHONPATH=src $(PYTEST) --cov src/ --cov-report html tests/
@@ -114,10 +108,10 @@ docker/build:
 	docker build --cache-from=$(DOCKER_IMAGE_LINUX) --tag=$(DOCKER_IMAGE_LINUX) --file=dockerfiles/Dockerfile-linux .
 
 docker/run/test:
-	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) $(DOCKER_IMAGE_LINUX) 'make test'
+	docker run --rm $(DOCKER_ENV) $(DOCKER_VOLUME) $(DOCKER_GROUP_ADD) $(DOCKER_DEVICE) $(DOCKER_IMAGE_LINUX) 'make test'
 
 docker/run/app:
-	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) $(DOCKER_IMAGE_LINUX) 'make run'
+	docker run --rm $(DOCKER_ENV) $(DOCKER_VOLUME) $(DOCKER_GROUP_ADD) $(DOCKER_DEVICE) $(DOCKER_IMAGE_LINUX) 'make run'
 
 docker/run/shell:
-	docker run --env-file dockerfiles/env.list -v /tmp/.X11-unix:/tmp/.X11-unix $(DEVICE) -it --rm $(DOCKER_IMAGE_LINUX)
+	docker run -it --rm $(DOCKER_ENV) $(DOCKER_VOLUME) $(DOCKER_GROUP_ADD) $(DOCKER_DEVICE) $(DOCKER_IMAGE_LINUX)

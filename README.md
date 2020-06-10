@@ -1,5 +1,6 @@
 # XCamera: Android-optimized camera widget
 
+[![Github Build Status](https://github.com/kivy-garden/xcamera/workflows/Tests/badge.svg)](https://github.com/kivy-garden/xcamera/actions?query=workflow%3ATests)
 [![Build Status](https://travis-ci.com/kivy-garden/xcamera.svg?branch=develop)](https://travis-ci.com/kivy-garden/xcamera)
 [![Coverage Status](https://coveralls.io/repos/github/kivy-garden/xcamera/badge.svg?branch=develop)](https://coveralls.io/github/kivy-garden/xcamera?branch=develop)
 [![PyPI version](https://badge.fury.io/py/xcamera.svg)](https://badge.fury.io/py/xcamera)
