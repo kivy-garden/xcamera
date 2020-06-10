@@ -25,7 +25,7 @@ ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8"
 
 # install system dependencies
-RUN apt install --yes --no-install-recommends \
+RUN apt update -qq > /dev/null && apt install --yes --no-install-recommends \
     make \
     sudo
 
@@ -40,6 +40,7 @@ RUN gpasswd --add ${USER} video
 USER ${USER}
 WORKDIR ${WORK_DIR}
 COPY Makefile requirements* ${WORK_DIR}/
-RUN sudo make system_dependencies && make virtualenv
+RUN sudo apt update -qq > /dev/null \
+    && sudo make system_dependencies && make virtualenv
 COPY . ${WORK_DIR}
 ENTRYPOINT ["./dockerfiles/start.sh"]
