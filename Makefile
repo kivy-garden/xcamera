@@ -111,3 +111,8 @@ docker/run/app:
 
 docker/run/shell:
 	docker run -it --rm $(DOCKER_ENV) $(DOCKER_VOLUME) $(DOCKER_GROUP_ADD) $(DOCKER_DEVICE) $(DOCKER_IMAGE_LINUX)
+
+docker/run/buildozer:
+	mkdir -p ~/.buildozer .buildozer bin
+	@if test -n "$$CI"; then sudo chown -R 1000:1000 ~/.buildozer .buildozer bin; fi; \
+	docker run --volume "$(CURDIR)":/home/user/hostcwd kivy/buildozer android debug
