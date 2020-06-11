@@ -1,4 +1,5 @@
 from threading import Thread
+from time import sleep
 from unittest import mock
 
 from kivy.app import App
@@ -28,9 +29,10 @@ class TestMain:
         Clock.schedule_once(
             lambda dt: app.root.ids.xcamera.dispatch(
                 'on_picture_taken', filename))
-        # makes sure app thread is gracefully stopped before asserting
-        app.stop()
         with patch_picture_taken() as m_picture_taken, patch_core_camera():
+            sleep(0.5)  # FIXME: nondeterministic approach
+            # makes sure app thread is gracefully stopped before asserting
+            app.stop()
             app_thread.join()
         camera_release_workaround(app)
         assert type(app) == CameraApp

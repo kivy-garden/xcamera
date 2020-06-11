@@ -11,6 +11,6 @@ jobs:
     - run: make docker/pull
     - run: make docker/build
     - run: |
-        sudo apt-get install xvfb libxkbcommon-x11-0
+        sudo apt install xvfb libxkbcommon-x11-0
         Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
     - run: make docker/run/test

@@ -16,17 +16,13 @@ SYSTEM_DEPENDENCIES= \
 	libsdl2-image-dev \
 	libsdl2-mixer-dev \
 	libsdl2-ttf-dev \
-	libpython3.6-dev \
-	libpython$(PYTHON_VERSION)-dev \
 	pkg-config \
-	python3.6 \
-	python3.6-dev \
+	python3.7 \
 	python$(PYTHON_VERSION) \
-	python$(PYTHON_VERSION)-dev \
 	tox \
 	virtualenv
 PYTHON_MAJOR_VERSION=3
-PYTHON_MINOR_VERSION=7
+PYTHON_MINOR_VERSION=8
 PYTHON_VERSION=$(PYTHON_MAJOR_VERSION).$(PYTHON_MINOR_VERSION)
 PYTHON_MAJOR_MINOR=$(PYTHON_MAJOR_VERSION)$(PYTHON_MINOR_VERSION)
 PYTHON_WITH_VERSION=python$(PYTHON_VERSION)
@@ -47,7 +43,7 @@ system_dependencies:
 
 $(VIRTUAL_ENV):
 	virtualenv --python $(PYTHON_WITH_VERSION) $(VIRTUAL_ENV)
-	$(PIP) install Cython==0.28.6
+	$(PIP) install Cython
 	$(PIP) install -r requirements.txt
 
 virtualenv: $(VIRTUAL_ENV)
