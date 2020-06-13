@@ -7,18 +7,18 @@ jobs:
     strategy:
       matrix:
         config:
-        - {setup_file: setup.py, secret_key: pypi_password_xcamera}
-        - {setup_file: setup_meta.py, secret_key: pypi_password_kivy_garden_xcamera}
+        - {setup_file: setup_meta.py, secret_key: pypi_password_xcamera}
+        - {setup_file: setup.py, secret_key: pypi_password_kivy_garden_xcamera}
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
         python-version: 3.7
     - run: python -m pip install --user --upgrade setuptools wheel kivy
-    - run: python setup.py sdist bdist_wheel
+    - run: python ${{ matrix.config.setup_file }} sdist bdist_wheel
     - name: Publish package
       if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
       uses: pypa/gh-action-pypi-publish@v1.2.2
       with:
         user: __token__
-        password: ${{ secrets[matrix.secret_key] }}
+        password: ${{ secrets[matrix.config.secret_key] }}
