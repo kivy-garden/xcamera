@@ -1,5 +1,7 @@
 # XCamera: Android-optimized camera widget
 
+[![Github Actions Tests](https://github.com/kivy-garden/xcamera/workflows/Tests/badge.svg)](https://github.com/kivy-garden/xcamera/actions?query=workflow%3ATests)
+[![Github Actions Android](https://github.com/kivy-garden/xcamera/workflows/Android/badge.svg)](https://github.com/kivy-garden/xcamera/actions?query=workflow%3AAndroid)
 [![Build Status](https://travis-ci.com/kivy-garden/xcamera.svg?branch=develop)](https://travis-ci.com/kivy-garden/xcamera)
 [![Coverage Status](https://coveralls.io/repos/github/kivy-garden/xcamera/badge.svg?branch=develop)](https://coveralls.io/github/kivy-garden/xcamera?branch=develop)
 [![PyPI version](https://badge.fury.io/py/xcamera.svg)](https://badge.fury.io/py/xcamera)
@@ -40,7 +42,7 @@ Notes:
 [xcamera is available on PyPI](https://pypi.org/project/xcamera/).
 Therefore it can be installed via `pip`.
 ```sh
-pip3 install --user xcamera
+pip3 install xcamera
 ```
 Once installed, the demo should be available in your `PATH` and can be ran from the command line.
 ```sh
