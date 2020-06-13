@@ -1,5 +1,16 @@
 # Change Log
 
+## [Unreleased]
+
+  - Increase test coverage to 93%
+  - Move PythonActivity from 'kivy' after 'renpy' drop, closes #15, refs #16
+  - Introduces GitHub actions, refs #18
+  - Also tests against Python 3.8, refs #19
+  - Android build CI, refs #20
+  - Uploads APK artifact, refs #21
+  - Automates PyPI releases from CI, refs #22
+  - Bumps to kivy post 2.0.0rc2 on Android, refs #23
+
 ## [2019.0928]
 
   - Setup coverage testing
