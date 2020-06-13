@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [2020.0613]
 
   - Increase test coverage to 93%
   - Move PythonActivity from 'kivy' after 'renpy' drop, closes #15, refs #16
