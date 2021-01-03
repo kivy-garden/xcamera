@@ -10,7 +10,7 @@ from kivy.uix.camera import Camera
 from kivy.uix.label import Label
 from kivy.utils import platform
 
-from .platform_api import LANDSCAPE, set_orientation, take_picture
+from .platform_api import LANDSCAPE, PORTRAIT, set_orientation, take_picture
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 resource_add_path(ROOT)
@@ -110,6 +110,9 @@ class XCamera(Camera):
 
     def force_landscape(self):
         self._previous_orientation = set_orientation(LANDSCAPE)
+
+    def force_portrait(self):
+        self._previous_orientation = set_orientation(PORTRAIT)
 
     def restore_orientation(self):
         if self._previous_orientation is not None:
