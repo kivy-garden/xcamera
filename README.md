@@ -17,7 +17,7 @@ functionality. In particular:
   3. it includes a method to force landscape mode. On Android, it is often
      desirable to switch to landscape mode when taking pictures: you can
      easily do it by calling `camera.force_landscape()`, and later
-     `camera.resource_orientation()` to restore the orientation to whatever it
+     `camera.restore_orientation()` to restore the orientation to whatever it
      was before.
 
 Screenshot:
