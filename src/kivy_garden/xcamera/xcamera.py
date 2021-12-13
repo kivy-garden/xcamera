@@ -61,11 +61,14 @@ class XCameraIconButton(ButtonBehavior, Label):
 
 class XCamera(Camera):
     directory = ObjectProperty(None)
+    kv_loaded = False
     _previous_orientation = None
     __events__ = ('on_picture_taken', 'on_camera_ready')
 
     def __init__(self, **kwargs):
-        Builder.load_file(os.path.join(ROOT, "xcamera.kv"))
+        if not XCamera.kv_loaded:
+            Builder.load_file(os.path.join(ROOT, "xcamera.kv"))
+            XCamera.kv_loaded = True
         super().__init__(**kwargs)
 
     def _on_index(self, *largs):
